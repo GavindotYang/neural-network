@@ -16,13 +16,13 @@ y1=sim(net,u);
 
 plot(u,t,'-',u,y1,'--');
 
-xlabel('时间');
+xlabel('Time');
 
-ylabel('函数值');
+ylabel('Value');
 
-title('未训练的BP网络逼近效果');
+title('The approximation effect of an untrained BP neural network');
 
-legend('要逼近的函数曲线','未训练的BP网络逼近曲线');
+legend(' the function to be approximated','The approximation curve of an untrained BP neural network');
 
 net=newff(minmax(u),[n,1],{'tansig' 'purelin'},'traingdm');
 
@@ -38,8 +38,8 @@ y2=sim(net,m);
 
 plot(u,t,'-',u,y1,'--',m,y2,'.');
 
-legend('要逼近的函数曲线','未训练的BP网络逼近曲线','训练后的BP网络逼近曲线');
+legend('The curve of the function to be approximated','The approximation curve of a trained BP neural network','The approximation curve of a trained BP neural network.');
 
-xlabel('时间');
+xlabel('Time');
 
-ylabel('函数值');
+ylabel('Value');
