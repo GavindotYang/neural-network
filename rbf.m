@@ -1,15 +1,15 @@
-%%%一元函数逼近%%%%
+%%%Univariate function approximation%%%%
 clear,clc;
 x=linspace( -4, 4,100);
-%神经网络输入值
-t=1.1*(1-x+2*x.^2).*exp((-x.^2)./2);  %t=10*x-30*sin(x) -80*tansig(x); %神经网络目标值
-plot(x,t, '+'); %待逼近的函数图像
-title('待逼近的函数图像' );
+%Neural network input values
+t=1.1*(1-x+2*x.^2).*exp((-x.^2)./2);  %t=10*x-30*sin(x) -80*tansig(x); %Neural network target values
+plot(x,t, '+'); %the function to be approximated
+title('the function to be approximated' );
 hold on
-net=newrb(x,t,1,2); %平方和误差小于1
-y=net(x) ;%神经网络输出值
-plot(x,y,'g'); %仿真的函数图像
-title('RBF神经网络函数逼近' );
-x1abel( '输入值');
-ylabel('目标值/输出值');
-mse(y,t) %平方和误差
+net=newrb(x,t,1,2); %The sum of squared errors is less than 1
+y=net(x) ;%Neural network output
+plot(x,y,'g'); %the simulated function
+title('RBF neural network function approximation' );
+x1abel( 'In值put');
+ylabel('Output/Target');
+mse(y,t) %SSE 

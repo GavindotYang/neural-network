@@ -3,7 +3,7 @@ close all;
 clc;
 k=4;
 Tolerance = 0.001;
-%Éú³ÉÊı¾İ
+%Generate data
 mu1 = [20 20];
 S1 = [10 0; 0 10];
 data1 = mvnrnd(mu1, S1, 100);
@@ -19,15 +19,15 @@ data4 = mvnrnd(mu4, S4, 100);
 data =[data1;data2;data3;data4];
 
 
-%%»­³öÔ­Ê¼Êı¾İ
+%%Original data
 figure(1);
 plot(data(:,1),data(:,2),'k.');
 grid on
 daspect([1 1 1]);
 xlabel('x');ylabel('y');
-title('Ô­Ê¼ÊäÈëµã');
+title('Original input points');
 hold on;
-%³õÊ¼¾ÛÀà½á¹û
+%Initial clustering results
 temp=randperm(size(data, 1));
 for i=1:k
     center(i,:) = data(temp(i),:);
@@ -36,13 +36,13 @@ end
 for i= 1: k
   x_dist(1,:) = data(:,1) - center(i,1);
   y_dist(2,:) = data(:,2) - center(i,2);
-  distance = sqrt(x_dist(1,:).^2+y_dist(2,:).^2); %Å·ÊÏ¾àÀë
+  distance = sqrt(x_dist(1,:).^2+y_dist(2,:).^2); %Euclidean distance
   dist(:,i)=distance';
 end
 
 [mindist,cluster] = min(dist,[],2);
 err_rec(1) = mean( mindist);
-disp(['Îó²îerr=',num2str(err_rec(1))]);
+disp(['err=',num2str(err_rec(1))]);
 figure(2);
 for i = 1:k
   index = cluster==i;
@@ -62,7 +62,7 @@ while(1)
     
     x_dist(1,:) = data(:,1) -center(i,1);
     y_dist(2,:) = data(:,2) -center(i,2);
-    distance = sqrt(x_dist(1,:).^2 + y_dist(2,:).^2); %Å·ÊÏ¾àÀë
+    distance = sqrt(x_dist(1,:).^2 + y_dist(2,:).^2); %Å·ï¿½Ï¾ï¿½ï¿½ï¿½
     dist(:,i) = distance';
   end
   [mindist, cluster] = min(dist, [], 2);
@@ -75,19 +75,19 @@ while(1)
     hold on
     plot(center(i,1),center(i,2),'k*');
   end
-  title('¾ÛÀà½á¹û');
+  title('clustering results');
   hold off
 grid on
 daspect([1 1 1]);
 pause(0.1); 
 drawnow
 
-disp([ 'µü´ú´ÎÊıieration= ',num2str(iteration)]);
-disp(['Îó²îerr=',num2str(err_rec(iteration+1))]);
+disp([ 'ieration= ',num2str(iteration)]);
+disp(['err=',num2str(err_rec(iteration+1))]);
 if iteration > 3 && err_rec(iteration) - err_rec(iteration+1)<Tolerance
-    disp('¡ª¡ª¡ª¡ª');
+    disp('â€”â€”â€”â€”');
     
-    disp( '½áÊø¾ÛÀà');
+    disp( 'Ending clustering');
     
 
     break
