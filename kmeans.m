@@ -62,7 +62,7 @@ while(1)
     
     x_dist(1,:) = data(:,1) -center(i,1);
     y_dist(2,:) = data(:,2) -center(i,2);
-    distance = sqrt(x_dist(1,:).^2 + y_dist(2,:).^2); %ŷ�Ͼ���
+    distance = sqrt(x_dist(1,:).^2 + y_dist(2,:).^2); 
     dist(:,i) = distance';
   end
   [mindist, cluster] = min(dist, [], 2);
